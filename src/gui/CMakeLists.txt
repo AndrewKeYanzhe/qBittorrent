@@ -333,5 +333,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         powermanagement/inhibitorwindows.cpp
         programupdater.h
         programupdater.cpp
+        windowsdpirecovery.h
+        windowsdpirecovery.cpp
     )
+    target_link_libraries(qbt_gui PRIVATE shcore uuid)
 endif()

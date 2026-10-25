@@ -101,6 +101,9 @@
 #include "gui/shutdownconfirmdialog.h"
 #include "gui/uithememanager.h"
 #include "gui/windowstate.h"
+#ifdef Q_OS_WIN
+#include "gui/windowsdpirecovery.h"
+#endif
 #endif // DISABLE_GUI
 
 #ifndef DISABLE_WEBUI
@@ -915,6 +918,7 @@ int Application::exec()
 
 #ifdef Q_OS_WIN
     installNativeEventFilter(new NativeEventFilter(UIThemeManager::instance(), this));
+    initializeWindowsDpiRecovery(this);
 #endif
 
     m_desktopIntegration = new DesktopIntegration;

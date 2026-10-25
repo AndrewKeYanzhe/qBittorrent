@@ -39,3 +39,15 @@ foreach(testFile ${testFiles})
 
     add_dependencies(check "${testFilename}")
 endforeach()
+
+if (GUI AND (CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+    find_package(Qt6 REQUIRED COMPONENTS Widgets)
+    add_executable(testwindowsdpirecovery
+        testwindowsdpirecovery.cpp
+        ../src/gui/windowsdpirecovery.cpp
+    )
+    target_include_directories(testwindowsdpirecovery PRIVATE ${Boost_INCLUDE_DIRS})
+    target_link_libraries(testwindowsdpirecovery PRIVATE qbt_common_cfg Qt::Test Qt::Widgets shcore uuid)
+    add_test(NAME testwindowsdpirecovery COMMAND testwindowsdpirecovery)
+    add_dependencies(check testwindowsdpirecovery)
+endif()

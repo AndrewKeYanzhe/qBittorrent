@@ -77,7 +77,10 @@ AboutDialog::AboutDialog(QWidget *parent)
             , tr("Home Page:")
             , tr("Forum:")
             , tr("Bug Tracker:"));
-    m_ui->labelAbout->setText(aboutText);
+    const QString personalBuildText = u"<p><b>%1</b><br/>%2</p>"_s
+        .arg(tr("Personal build \u2014 DPI wake recovery (experimental)").toHtmlEscaped()
+            , tr("Built locally for personal use, with automatic display scaling recovery after wake.").toHtmlEscaped());
+    m_ui->labelAbout->setText(personalBuildText + aboutText);
 
     m_ui->labelMascot->setPixmap(Utils::Gui::scaledPixmap(Path(u":/icons/mascot.png"_s)));
 
